@@ -12,7 +12,7 @@ const Login = ({ setIsAuthenticated }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/login', { username, password });
+      const response = await axios.post('http://localhost:3000/api/auth/login', { username, password });
       setMessage('Login successful');
       localStorage.setItem('token', response.data.token);
       setIsAuthenticated(true);
