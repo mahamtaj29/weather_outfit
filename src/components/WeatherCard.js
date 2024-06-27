@@ -5,6 +5,7 @@ import Recommendations from "./Recommendations";
 import genEmoji from "../utils/genEmoji";
 import UnitToggle from "./UnitToggle";
 import Loading from "./Loading";
+//import BackgroundImage from "./BackgroundImage";
 
 const WeatherCard = () => {
   const [city, setCity] = useState("");
