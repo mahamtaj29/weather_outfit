@@ -10,6 +10,9 @@ import Rainy from "../images/Rainy.jpg";
 import Snow from "../images/snow.jpg";
 import Fog from "../images/fog.png";
 import Stormy from "../images/Stormy.jpg";
+import sky from "../images/sky.jpg";
+
+import Loading from "./Loading";
 
 const WeatherCard = () => {
   const [city, setCity] = useState("");
@@ -18,6 +21,8 @@ const WeatherCard = () => {
   const [temperatureUnit, setTemperatureUnit] = useState("metric");
   const [loading, setLoading] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(Clear);
+
+  //const [imageLoaded, setImageLoaded] = useState(false);
 
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
@@ -43,19 +48,22 @@ const WeatherCard = () => {
 
       // Update background image based on weather conditions
       const condition = data.weather[0].description.toLowerCase();
+      let newBackgroundImage = Clear;
       if (condition.includes("clear")) {
-        setBackgroundImage(Clear);
+        newBackgroundImage = Clear;
       } else if (condition.includes("cloud")) {
-        setBackgroundImage(Cloudy);
+        newBackgroundImage = Cloudy;
       } else if (condition.includes("rain") || condition.includes("shower")) {
-        setBackgroundImage(Rainy);
+        newBackgroundImage = Rainy;
       } else if (condition.includes("snow")) {
-        setBackgroundImage(Snow);
+        newBackgroundImage = Snow;
       } else if (condition.includes("fog")) {
-        setBackgroundImage(Fog);
+        newBackgroundImage = Fog;
       } else if (condition.includes("thunder") || condition.includes("storm")) {
-        setBackgroundImage(Stormy);
+        newBackgroundImage = Stormy;
       }
+      //setImageLoaded(false); // Reset the image loaded state
+      setBackgroundImage(newBackgroundImage);
 
       const forecastResponse = await fetch(
         `${forecastUrl}?q=${city}&appid=${apiKey}&units=metric`
@@ -69,7 +77,6 @@ const WeatherCard = () => {
           throw new Error("Failed to fetch forecast data");
         }
       }
-
       const forecastData = await forecastResponse.json();
       const forecasts = forecastData.list.filter(
         (item, index) => index % 8 === 0
@@ -81,11 +88,9 @@ const WeatherCard = () => {
       setLoading(false);
     }
   };
-
   const handleTemperatureUnitChange = (unit) => {
     setTemperatureUnit(unit);
   };
-
   const convertTemperature = (temp) => {
     if (temperatureUnit === "imperial") {
       return `${Math.round((temp * 9) / 5 + 32)}°F`;
@@ -93,10 +98,16 @@ const WeatherCard = () => {
       return `${Math.round(temp)}°C`;
     }
   };
+  /* useEffect(() => {
+    const img = new Image();
+    img.src = backgroundImage;
+    img.onload = () => setImageLoaded(true);
+  }, [backgroundImage]); */
 
   return (
     <Box
       sx={{
+        //backgroundImage: imageLoaded ? `url(${backgroundImage})` : "none",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -107,6 +118,7 @@ const WeatherCard = () => {
         justifyContent: "center",
         color: "white",
         textShadow: "1px 1px 4px rgba(0,0,0,0.8)",
+        transition: "background-image 0.5s ease-in-out",
       }}
     >
       <Container
@@ -145,6 +157,7 @@ const WeatherCard = () => {
           >
             Back
           </Button> */}
+          {loading && <Loading />}
           {weatherData && !loading && (
             <Box id="weather-container" sx={{ textAlign: "center" }}>
               <Typography variant="h4" component="h2" sx={{ mt: 2 }}>
