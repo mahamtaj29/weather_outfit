@@ -44,6 +44,11 @@ const Register = () => {
           autoFocus
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          InputProps={{
+            style: {
+              color: 'black',
+            },
+          }}
         />
         <TextField
           variant="outlined"
@@ -57,6 +62,11 @@ const Register = () => {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          InputProps={{
+            style: {
+              color: 'black',
+            },
+          }}
         />
         <Button
           type="submit"

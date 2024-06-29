@@ -18,7 +18,7 @@ const Login = ({ setIsAuthenticated }) => {
       setIsAuthenticated(true);
       navigate('/weather');
     } catch (error) {
-      setMessage('Login failed: ' + error.response.data.message);
+      setMessage('Login failed, If you are new User, try registration first: ');
     }
   };
 
@@ -47,6 +47,11 @@ const Login = ({ setIsAuthenticated }) => {
           autoFocus
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          InputProps={{
+            style: {
+              color: 'black',
+            },
+          }}
         />
         <TextField
           variant="outlined"
@@ -60,6 +65,11 @@ const Login = ({ setIsAuthenticated }) => {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          InputProps={{
+            style: {
+              color: 'black',
+            },
+          }}
         />
         <Button
           type="submit"

@@ -4,8 +4,6 @@ import WeatherForecast from "./WeatherForecast";
 import Recommendations from "./Recommendations";
 import genEmoji from "../utils/genEmoji";
 import UnitToggle from "./UnitToggle";
-import Loading from "./Loading";
-//import { useNavigate } from "react-router-dom";
 import Clear from "../images/Clear.jpg";
 import Cloudy from "../images/Cloudy.jpg";
 import Rainy from "../images/Rainy.jpg";
@@ -20,8 +18,6 @@ const WeatherCard = () => {
   const [temperatureUnit, setTemperatureUnit] = useState("metric");
   const [loading, setLoading] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(Clear);
-
-  //const navigate = useNavigate();
 
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
@@ -149,7 +145,6 @@ const WeatherCard = () => {
           >
             Back
           </Button> */}
-          {loading && <Loading />}
           {weatherData && !loading && (
             <Box id="weather-container" sx={{ textAlign: "center" }}>
               <Typography variant="h4" component="h2" sx={{ mt: 2 }}>
@@ -170,16 +165,6 @@ const WeatherCard = () => {
               </Typography>
             </Box>
           )}
-          {/* {" "}
-          <Button
-            id="search-button"
-            variant="contained"
-            color="secondary"
-            onClick={() => navigate("/")}
-            sx={{ mt: -2 }}
-          >
-            Back
-          </Button> */}
         </Box>
         <Box sx={{ textAlign: "center" }}>
           <Recommendations weatherData={weatherData} />
