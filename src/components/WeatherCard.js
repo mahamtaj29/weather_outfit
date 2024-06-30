@@ -61,6 +61,8 @@ const WeatherCard = () => {
         newBackgroundImage = Fog;
       } else if (condition.includes("thunder") || condition.includes("storm")) {
         newBackgroundImage = Stormy;
+      } else {
+        newBackgroundImage = sky;
       }
       //setImageLoaded(false); // Reset the image loaded state
       setBackgroundImage(newBackgroundImage);

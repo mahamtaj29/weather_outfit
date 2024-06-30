@@ -50,17 +50,16 @@ const verifyToken = (req, res) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "no tokens" });
+    return res.status(401).json({ message: "no token provided" });
   }
 
   try {
     const decode = jwt.verify(token, process.env.JWT_SECRET);
     res.status(200).json({
-      message: "TOken is valid",
+      message: "Token is valid",
       user: {
         id: decode.id,
-        id: decode.username,
-        roles: decode.roles,
+        username: decode.username,
       },
     });
   } catch (error) {

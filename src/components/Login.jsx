@@ -1,7 +1,8 @@
 // src/components/Login.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setIsAuthenticated }) => {
@@ -16,11 +17,34 @@ const Login = ({ setIsAuthenticated }) => {
       setMessage('Login successful');
       localStorage.setItem('token', response.data.token);
       setIsAuthenticated(true);
-      navigate('/weather');
+      navigate('/welcome');
     } catch (error) {
       setMessage('Login failed, If you are new User, try registration first: ');
     }
   };
+
+  const verifyToken = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const response = await axios.get('http://localhost:3000/api/auth/verify', {
+          //{ Authorization: token }
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        console.log('Token is valid:', response.data);
+        //new step
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      console.error('Token verification failed:', error.response ? error.response.data : error.message);
+      setIsAuthenticated(false);
+      //navigate('/login'); // Redirect to login if token verification fails
+    }
+  };
+
+  useEffect(() => {
+    verifyToken();
+  }, []); // Empty dependency array to run only once
 
   return (
     <Container component="main" maxWidth="xs">
@@ -81,6 +105,10 @@ const Login = ({ setIsAuthenticated }) => {
           Login
         </Button>
         {message && <Typography color="error">{message}</Typography>}
+        {/* Link to navigate to /welcome */}
+        <Link to="/welcome" variant="body2">
+          Go to Welcome Page
+        </Link>
       </Box>
     </Container>
   );

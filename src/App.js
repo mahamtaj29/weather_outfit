@@ -12,11 +12,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Im
 import axios from "axios";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Welcome from "./components/Welcome";
+import { Navigate } from "react-router-dom";
 
 function App() {
   // State to track if the user is authenticated
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [message, setMessage] = useState("");
 
   // Verify the token on initial load (if token exists)
   useEffect(() => {
@@ -26,17 +27,16 @@ function App() {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            "http://localhost:3000/api/auth/verify-token",
+            "http://localhost:3000/api/auth/verify",
             {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             }
           );
-          setMessage(`Welcome, ${response.data.user.username}`);
           setIsAuthenticated(true);
         } catch (error) {
-          setMessage("You are not logged in");
+          setIsAuthenticated(false);
         }
       }
     };
@@ -47,10 +47,8 @@ function App() {
   // Handle user logout
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setMessage("You have logged out");
     setIsAuthenticated(false);
   };
-
   return (
     <Router>
       {" "}
@@ -75,28 +73,18 @@ function App() {
         <Routes>
           {/* Home route for login and signup */}
           <Route path="/" element={<WeatherCard />} />
-          <Route path="/weather" element={<WeatherCard />} />
+          {/* <Route path="/weather" element={<WeatherCard />} /> */}
           {/* Weather route, only accessible if authenticated */}
           <Route
             path="/login"
             element={<Login setIsAuthenticated={setIsAuthenticated} />}
           />
           <Route path="/register" element={<Register />} />
-
-          {/* <Route
-              path="/"
-              element={
-                isAuthenticated ? (
-                  <WeatherCard />
-                ) : (
-                  <Home setIsAuthenticated={setIsAuthenticated} />
-                )
-              }
-            />
-            <Route
-              path="/login"
-              element={<Home setIsAuthenticated={setIsAuthenticated} />}
-            /> */}
+          <Route
+            path="/welcome"
+            element={<Welcome />}
+            //element={isAuthenticated ? <Welcome /> : <Navigate to="/login" />}
+          />
         </Routes>
         {/* </Box> */}
       </ThemeProvider>

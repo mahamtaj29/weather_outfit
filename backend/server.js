@@ -3,15 +3,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const authRoutes = require("./routes/authRoute");
+const cityRoutes = require("./routes/cityRoute");
 const passportConfig = require("./middleware/passportConfig");
 const cors = require("cors");
 const app = express();
 
-//
+//Initialize passport configuration
 passportConfig(passport);
 
-const allowedLinks = ["http://localhost:3000", "http://localhost:3001"];
+// Define allowed origins
+const allowedLinks = ["http://localhost:3001", "http://localhost:3000"];
 
+// Define CORS options
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedLinks.indexOf(origin) !== -1 || !origin) {
@@ -24,20 +27,18 @@ const corsOptions = {
   credentials: true,
 };
 
-// middle ware
+// // Use the CORS middleware with the defined options
 app.use(cors(corsOptions));
-app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
-
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
 
 // routes
-//app.use("/api/products", productRoute);
 app.use("/api/auth", authRoutes);
+app.use("/api/cities", cityRoutes);
 
 // Connection
 mongoose

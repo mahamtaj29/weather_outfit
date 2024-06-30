@@ -15,7 +15,9 @@ const Register = () => {
       });
       setMessage("Registration successful. Please log in.");
     } catch (error) {
+      const errorMessage = error.response?.data?.message || "An error occurred during registration.";
       setMessage("Registration failed: " + error.response.data.message);
+      console.log(errorMessage);
     }
   };
 
