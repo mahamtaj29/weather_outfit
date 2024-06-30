@@ -14,6 +14,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Welcome from "./components/Welcome";
 import { Navigate } from "react-router-dom";
+import CityList from "./components/CityList";
 
 function App() {
   // State to track if the user is authenticated
@@ -84,6 +85,10 @@ function App() {
             path="/welcome"
             element={<Welcome />}
             //element={isAuthenticated ? <Welcome /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/cities"
+            element={isAuthenticated ? <CityList /> : <Navigate to="/login" />}
           />
         </Routes>
         {/* </Box> */}

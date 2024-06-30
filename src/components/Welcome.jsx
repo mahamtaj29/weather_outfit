@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Welcome = () => {
   const [city, setCity] = useState('');
@@ -19,7 +20,9 @@ const Welcome = () => {
         },
       });
       setMessage('City saved successfully!');
+      setCity('');
     } catch (error) {
+      console.error('Error saving city:', error);
       setMessage('Error saving city');
     }
   };
@@ -35,9 +38,9 @@ const Welcome = () => {
           color: 'black',
         }}
       >
-        <Typography component="h1" variant="h5">
-          Welcome
-        </Typography>
+        <Typography variant="h4" gutterBottom>
+        Welcome
+      </Typography>
         <Typography variant="body1">
           You are logged in. Please write your favoirite cities to see weather forcast!
         </Typography>
@@ -69,6 +72,11 @@ const Welcome = () => {
           Save City
         </Button>
         {message && <Typography color="error">{message}</Typography>}
+        <Box mt={2}>
+        <Link to="/cities">
+          <Button variant="contained">View Favorite Cities</Button>
+        </Link>
+        </Box>
       </Box>
     </Container>
   );
