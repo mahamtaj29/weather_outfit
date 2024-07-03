@@ -12,7 +12,7 @@ const app = express();
 passportConfig(passport);
 
 // Define allowed origins
-const allowedLinks = ["http://localhost:3001", "http://localhost:3000"];
+const allowedLinks = ["http://localhost:3000", "http://localhost:3001"];
 
 // Define CORS options
 const corsOptions = {
