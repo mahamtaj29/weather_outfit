@@ -35,6 +35,13 @@ function App() {
               },
             }
           );
+          if (response.status === 200) {
+            console.log("Token is valid");
+            // Additional logic here
+          } else {
+            console.log("Token is invalid");
+            // Handle error
+          }
           setIsAuthenticated(true);
         } catch (error) {
           setIsAuthenticated(false);

@@ -22,7 +22,7 @@ const Login = ({ setIsAuthenticated }) => {
       setMessage('Login failed, If you are new User, try registration first: ');
     }
   };
-
+  useEffect(() => {
   const verifyToken = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -41,10 +41,8 @@ const Login = ({ setIsAuthenticated }) => {
       //navigate('/login'); // Redirect to login if token verification fails
     }
   };
-
-  useEffect(() => {
     verifyToken();
-  }, []); // Empty dependency array to run only once
+  }, [setIsAuthenticated]); 
 
   return (
     <Container component="main" maxWidth="xs">

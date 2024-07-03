@@ -19,6 +19,13 @@ const Welcome = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (response.status === 200) {
+        console.log("Token is valid");
+        // Additional logic here
+      } else {
+        console.log("Token is invalid");
+        // Handle error
+      }
       setMessage('City saved successfully!');
       setCity('');
     } catch (error) {
@@ -26,6 +33,7 @@ const Welcome = () => {
       setMessage('Error saving city');
     }
   };
+ 
 
   return (
     <Container component="main" maxWidth="xs">

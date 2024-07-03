@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Grid, CardContent, CircularProgress, Card, Box } from '@mui/material';
 import axios from 'axios';
 import sky from "../images/sky.jpg";
-import WeatherCard from './WeatherCard';
 import Recommendations from './Recommendations';
 
 const CityList = () => {
