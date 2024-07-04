@@ -11,24 +11,8 @@ const PORT = process.env.PORT || 8000;
 //Initialize passport configuration
 passportConfig(passport);
 
-// Define allowed origins
-// const allowedLinks = [
-//   "http://localhost:3000",
-//   "http://localhost:3001",
-//   "https://weather-outfit-frontend.vercel.app",
-// ];
-
 // Define CORS options
 const corsOptions = {
-  // origin: function (origin, callback) {
-  //   // Allow requests with no origin (like mobile apps or curl requests)
-  //   if (!origin) return callback(null, true);
-  //   if (allowedLinks.indexOf(origin) !== -1) {
-  //     callback(null, true);
-  //   } else {
-  //     callback(new Error("Not allowed by CORS"));
-  //   }
-  // },
   origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
@@ -37,28 +21,11 @@ const corsOptions = {
   optionsSuccessStatus: 200,
   credentials: true,
 };
-
 // // Use the CORS middleware with the defined options
 app.use(cors());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(passport.initialize());
-/* app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  next();
-}); 
-app.use(
-  cors({
-    origin: "https://weather-outfit-frontend.vercel.app",
-  })
-); */
-
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   next();
-// });
 
 // routes
 app.use("/api/auth", authRoutes);
