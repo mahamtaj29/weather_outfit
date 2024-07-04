@@ -32,17 +32,16 @@ app.use(cors());
 //app.use(cors(corsOptions));
 app.use(express.json());
 app.use(passport.initialize());
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
-});
-/* app.use(
+}); */
+app.use(
   cors({
-    origin:
-      "https://weather-outfit-backend-duppuv4s1-maham-tajs-projects.vercel.app",
+    origin: "https://weather-outfit-frontend.vercel.app",
   })
 );
- */
+
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/cities", cityRoutes);
