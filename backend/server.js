@@ -7,7 +7,7 @@ const cityRoutes = require("./routes/cityRoute");
 const passportConfig = require("./middleware/passportConfig");
 const cors = require("cors");
 const app = express();
-
+const PORT = process.env.PORT || 8000;
 //Initialize passport configuration
 passportConfig(passport);
 
@@ -44,7 +44,7 @@ app.use("/api/cities", cityRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT, () => {
+    app.listen(PORT, () => {
       console.log(`App running on PORT ${process.env.PORT}`);
     });
   })
