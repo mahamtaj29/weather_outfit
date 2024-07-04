@@ -11,7 +11,7 @@ const Login = ({ setIsAuthenticated }) => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
   const backendUrl =
-    "https://weather-outfit-backend-duppuv4s1-maham-tajs-projects.vercel.app";
+    "https://weather-outfit-backend.vercel.app";
   const handleLogin = async () => {
     try {
       

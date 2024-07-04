@@ -7,7 +7,7 @@ const Welcome = () => {
   const [city, setCity] = useState('');
   const [message, setMessage] = useState('');
   const backendUrl =
-    "https://weather-outfit-backend-duppuv4s1-maham-tajs-projects.vercel.app";
+    "https://weather-outfit-backend.vercel.app";
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
