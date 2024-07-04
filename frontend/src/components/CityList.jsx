@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Grid, CardContent, CircularProgress, Card, Box } from '@mui/material';
 import axios from 'axios';
-import sky from "../images/sky.jpg";
 import Recommendations from './Recommendations';
 import sky1 from "../images/sky1.jpg";
 const CityList = () => {
@@ -84,7 +83,7 @@ const CityList = () => {
   }}>
     <Container>
         <Box> 
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h3" gutterBottom>
         Favorite Cities and Weather Forecast
       </Typography >
       <Grid container spacing={3}>

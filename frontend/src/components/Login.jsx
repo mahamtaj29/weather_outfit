@@ -21,7 +21,7 @@ const Login = ({ setIsAuthenticated }) => {
       setIsAuthenticated(true);
       navigate('/welcome');
     } catch (error) {
-      setMessage('Login failed, If you are new User, try registration first: ');
+      setMessage('Login failed, New User must try registration first! ');
     }
   };
   useEffect(() => {

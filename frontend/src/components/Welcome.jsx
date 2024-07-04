@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import welcome from "../images/welcome.jpg";
 const Welcome = () => {
   const [city, setCity] = useState('');
   const [message, setMessage] = useState('');
@@ -37,6 +37,21 @@ const Welcome = () => {
  
 
   return (
+    <Box
+      sx={{
+        backgroundImage: `url(${welcome})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "white",
+        textShadow: "1px 1px 4px rgba(0,0,0,0.8)",
+        transition: "background-image 0.5s ease-in-out",
+      }}
+    >
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
@@ -51,7 +66,8 @@ const Welcome = () => {
         Welcome
       </Typography>
         <Typography variant="body1">
-          You are logged in. Please write your favoirite cities to see weather forcast!
+          Successfully logged in. 
+          Please enter your favoirite cities!
         </Typography>
         <TextField
           variant="outlined"
@@ -88,6 +104,7 @@ const Welcome = () => {
         </Box>
       </Box>
     </Container>
+    </Box>
   );
 };
 

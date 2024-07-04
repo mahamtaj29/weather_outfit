@@ -17,9 +17,6 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
         <Button component={RouterLink} to="/" color="inherit">
           Home
         </Button>
-        {/* <Button component={RouterLink} to="/weather" color="inherit">
-          Weather
-        </Button> */}
         {!isAuthenticated ? (
           <>
             <Button component={RouterLink} to="/login" color="inherit">

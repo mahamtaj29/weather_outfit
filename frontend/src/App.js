@@ -60,19 +60,6 @@ function App() {
       {/* Wrap your entire application with Router */}
       <ThemeProvider theme={theme}>
         <CssBaseline />
-
-        {/* <Box
-          className="sky"
-          style={{
-            backgroundImage: `url(${sky})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            //alignItems: "center",
-          }}
-        > */}
         {/* Pass authentication state to Navbar */}
         <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
         <Routes>
