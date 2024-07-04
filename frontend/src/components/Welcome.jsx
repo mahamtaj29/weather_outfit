@@ -6,15 +6,16 @@ import { Link } from 'react-router-dom';
 const Welcome = () => {
   const [city, setCity] = useState('');
   const [message, setMessage] = useState('');
-
+  const backendUrl =
+    "https://weather-outfit-backend-duppuv4s1-maham-tajs-projects.vercel.app";
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
-
+  
   const handleCitySubmit = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:8000/api/cities', { name: city }, {
+      const response = await axios.post(`${backendUrl}/api/cities`, { name: city }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

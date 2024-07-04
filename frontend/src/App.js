@@ -19,7 +19,8 @@ import CityList from "./components/CityList";
 function App() {
   // State to track if the user is authenticated
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const backendUrl =
+    "https://weather-outfit-backend-duppuv4s1-maham-tajs-projects.vercel.app";
   // Verify the token on initial load (if token exists)
   useEffect(() => {
     const verifyToken = async () => {
@@ -27,14 +28,11 @@ function App() {
       if (token) {
         try {
           const token = localStorage.getItem("token");
-          const response = await axios.get(
-            "http://localhost:8000/api/auth/verify",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await axios.get(`${backendUrl}/api/auth/verify`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           if (response.status === 200) {
             console.log("Token is valid");
             // Additional logic here

@@ -21,14 +21,15 @@ const Home = ({ setIsAuthenticated }) => {
   const [password, setPassword] = useState('');
   const [notification, setNotification] = useState('');
   const navigate = useNavigate();
-
+  const backendUrl =
+    "https://weather-outfit-backend-duppuv4s1-maham-tajs-projects.vercel.app";
   // Verify token on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await axios.get('http://localhost:3000/api/auth/verify-token', {
+          const response = await axios.get(`${backendUrl}/api/auth/verify`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

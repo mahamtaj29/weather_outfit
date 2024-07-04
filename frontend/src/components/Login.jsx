@@ -10,10 +10,12 @@ const Login = ({ setIsAuthenticated }) => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-
+  const backendUrl =
+    "https://weather-outfit-backend-duppuv4s1-maham-tajs-projects.vercel.app";
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/api/auth/login', { username, password });
+      
+      const response = await axios.post(`${backendUrl}/api/auth/login`, { username, password });
       setMessage('Login successful');
       localStorage.setItem('token', response.data.token);
       setIsAuthenticated(true);

@@ -9,15 +9,17 @@ const CityList = () => {
   const [cities, setCities] = useState([]);
   const [weatherData, setWeatherData] = useState({});
   const [loading, setLoading] = useState(true);
-
+  const backendUrl =
+    "https://weather-outfit-backend-duppuv4s1-maham-tajs-projects.vercel.app";
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
   useEffect(() => {
     const fetchCities = async () => {
       try {
+        
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8000/api/cities', {
+        const response = await axios.get(`${backendUrl}/api/cities`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
