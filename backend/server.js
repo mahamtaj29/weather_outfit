@@ -12,29 +12,34 @@ const PORT = process.env.PORT || 8000;
 passportConfig(passport);
 
 // Define allowed origins
-const allowedLinks = [
-  "http://localhost:3000",
-  "http://localhost:3001",
-  "https://weather-outfit-frontend.vercel.app",
-];
+// const allowedLinks = [
+//   "http://localhost:3000",
+//   "http://localhost:3001",
+//   "https://weather-outfit-frontend.vercel.app",
+// ];
 
 // Define CORS options
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedLinks.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  // origin: function (origin, callback) {
+  //   // Allow requests with no origin (like mobile apps or curl requests)
+  //   if (!origin) return callback(null, true);
+  //   if (allowedLinks.indexOf(origin) !== -1) {
+  //     callback(null, true);
+  //   } else {
+  //     callback(new Error("Not allowed by CORS"));
+  //   }
+  // },
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  optionsSuccessStatus: 200, // Sets the status code to 200 for preflight OPTIONS requests
+  credentials: true, // Allows cookies and authorization headers with credentials
   optionsSuccessStatus: 200,
   credentials: true,
 };
 
 // // Use the CORS middleware with the defined options
-//app.use(cors());
+app.use(cors());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(passport.initialize());
@@ -48,15 +53,12 @@ app.use(
   })
 ); */
 
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://weather-outfit-frontend.vercel.app"
-  );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   next();
+// });
 
 // routes
 app.use("/api/auth", authRoutes);

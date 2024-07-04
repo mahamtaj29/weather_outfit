@@ -6,19 +6,18 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const backendUrl =
-    "https://weather-outfit-backend.vercel.app";
+ // const backendUrl = "https://weather-outfit-backend.vercel.app";
   
   const handleRegister = async () => {
     try {
-      await axios.post(`${backendUrl}/api/auth/register`, {
+      await axios.post(`https://weather-outfit-backend.vercel.app/api/auth/register`, {
         username,
         password,
       });
       setMessage("Registration successful. Please log in.");
     } catch (error) {
       const errorMessage = error.response?.data?.message || "An error occurred during registration.";
-      setMessage("Registration failed: " + error.response.data.message);
+      setMessage("Registration failed: " + errorMessage);
       console.log(errorMessage);
     }
   };
