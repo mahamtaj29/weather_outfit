@@ -180,8 +180,14 @@ const WeatherCard = () => {
                   onUnitChange={handleTemperatureUnitChange}
                 />
               </Typography>
+              <Typography variant="body1">{`Feels Like: ${convertTemperature(
+                weatherData.main.feels_like
+              )}`}</Typography>
               <Typography variant="body1">{`Humidity: ${weatherData.main.humidity}%`}</Typography>
               <Typography variant="body1">{`Wind Speed: ${weatherData.wind.speed} km/h`}</Typography>
+              <Typography variant="body1">{`Visibility: ${weatherData.visibility} meters`}</Typography>
+              <Typography variant="body1">{`Pressure: ${weatherData.main.pressure} hPa`}</Typography>
+              <Typography variant="body1">{`Cloudiness: ${weatherData.clouds.all}%`}</Typography>
               <Typography variant="body1" sx={{ mb: 2 }}>
                 {genEmoji(weatherData.weather[0].icon)}{" "}
                 {weatherData.weather[0].description}

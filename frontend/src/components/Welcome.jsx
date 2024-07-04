@@ -48,7 +48,6 @@ const Welcome = () => {
         alignItems: "center",
         justifyContent: "center",
         color: "white",
-        textShadow: "1px 1px 4px rgba(0,0,0,0.8)",
         transition: "background-image 0.5s ease-in-out",
       }}
     >
@@ -97,6 +96,9 @@ const Welcome = () => {
           Save City
         </Button>
         {message && <Typography color="error">{message}</Typography>}
+        <Typography variant="body1">
+          Or
+        </Typography>
         <Box mt={2}>
         <Link to="/cities">
           <Button variant="contained">View Favorite Cities</Button>

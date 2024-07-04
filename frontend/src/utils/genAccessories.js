@@ -1,6 +1,6 @@
 const genAccessories = (weatherDescription, humidity) => {
   if (weatherDescription === "Clear") {
-    return "Consider wearing sunglasses or a light scarf today. Have a great day!";
+    return "Consider wearing sunglasses and carry some water. Have a great day!";
   } else if (
     weatherDescription === "Rain" ||
     weatherDescription === "Drizzle"
@@ -9,7 +9,7 @@ const genAccessories = (weatherDescription, humidity) => {
   } else if (humidity > 70) {
     return "Humid weather, consider a light hat or scarf today. Have a great day!";
   } else {
-    return " Carry a light scarf or sunglasses today. Have a great day!";
+    return " Carry a light scarf today. Have a great day!";
   }
 };
 
