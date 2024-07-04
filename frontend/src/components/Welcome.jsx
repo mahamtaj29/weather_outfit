@@ -14,7 +14,7 @@ const Welcome = () => {
   const handleCitySubmit = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:3000/api/cities', { name: city }, {
+      const response = await axios.post('http://localhost:8000/api/cities', { name: city }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -13,7 +13,7 @@ const Login = ({ setIsAuthenticated }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { username, password });
+      const response = await axios.post('http://localhost:8000/api/auth/login', { username, password });
       setMessage('Login successful');
       localStorage.setItem('token', response.data.token);
       setIsAuthenticated(true);
@@ -27,7 +27,7 @@ const Login = ({ setIsAuthenticated }) => {
     try {
       const token = localStorage.getItem('token');
       if (token) {
-        const response = await axios.get('http://localhost:5000/api/auth/verify', {
+        const response = await axios.get('http://localhost:8000/api/auth/verify', {
           //{ Authorization: token }
           headers: { Authorization: `Bearer ${token}` }
         });

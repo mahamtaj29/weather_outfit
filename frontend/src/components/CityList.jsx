@@ -17,7 +17,7 @@ const CityList = () => {
     const fetchCities = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:3000/api/cities', {
+        const response = await axios.get('http://localhost:8000/api/cities', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
