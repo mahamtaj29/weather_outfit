@@ -139,26 +139,33 @@ const WeatherCard = () => {
             fullWidth
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            sx={{ mb: 2 }}
+            sx={{
+              mb: 2,
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "white", // border color
+                },
+                "&:hover fieldset": {
+                  borderColor: "white", // border color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "white", // border color when focused
+                },
+              },
+              "& .MuiInputLabel-root": {
+                color: "white", // label color
+              },
+            }}
           />
           <Button
             id="search-button"
             variant="contained"
             color="primary"
             onClick={handleSearch}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, color: "white" }}
           >
             Search
           </Button>{" "}
-          {/*  <Button
-            id="search-button"
-            variant="contained"
-            color="secondary"
-            onClick={() => navigate("/")}
-            sx={{ mt: -2 }}
-          >
-            Back
-          </Button> */}
           {loading && <Loading />}
           {weatherData && !loading && (
             <Box id="weather-container" sx={{ textAlign: "center" }}>
