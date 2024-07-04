@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import simple from "../images/simple.jpg";
 const Login = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -47,7 +47,23 @@ const Login = ({ setIsAuthenticated }) => {
   }, [setIsAuthenticated]); 
 
   return (
-    <Container component="main" maxWidth="xs">
+    <div style={{
+      backgroundImage: `url(${simple})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "white",
+      transition: "background-image 0.5s ease-in-out",
+  }}>
+    <Container component="main" maxWidth="xs" style={{
+          position: "relative", // Ensure the Container stays within the bounds of the background div
+          zIndex: 1, // Ensure Container is above background
+        }}
+    >
       <Box
         sx={{
           marginTop: 8,
@@ -106,11 +122,12 @@ const Login = ({ setIsAuthenticated }) => {
         </Button>
         {message && <Typography color="error">{message}</Typography>}
         {/* Link to navigate to /welcome */}
-        <Link to="/welcome" variant="body2">
+        {/* <Link to="/welcome" variant="body2">
           Go to Welcome Page
-        </Link>
+        </Link> */}
       </Box>
     </Container>
+    </div>
   );
 };
 

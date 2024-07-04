@@ -4,7 +4,7 @@ import { Container, Typography, Grid, CardContent, CircularProgress, Card, Box }
 import axios from 'axios';
 import sky from "../images/sky.jpg";
 import Recommendations from './Recommendations';
-
+import sky1 from "../images/sky1.jpg";
 const CityList = () => {
   const [cities, setCities] = useState([]);
   const [weatherData, setWeatherData] = useState({});
@@ -70,18 +70,19 @@ const CityList = () => {
   }
 
   return (
-    <Container  
-    className="sky"
-    style={{
-      backgroundImage: `url(${sky})`,
+    <div style={{
+      backgroundImage: `url(${sky1})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       minHeight: "100vh",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      color: 'black',
-    }}>
+      justifyContent: "center",
+      color: "white",
+      transition: "background-image 0.5s ease-in-out",
+  }}>
+    <Container>
         <Box> 
       <Typography variant="h4" gutterBottom>
         Favorite Cities and Weather Forecast
@@ -137,6 +138,7 @@ const CityList = () => {
        </Grid>
       </Box>
     </Container>
+    </div>
   );
 };
 

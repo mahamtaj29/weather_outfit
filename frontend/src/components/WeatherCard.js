@@ -7,10 +7,11 @@ import UnitToggle from "./UnitToggle";
 import Clear from "../images/Clear.jpg";
 import Cloudy from "../images/Cloudy.jpg";
 import Rainy from "../images/Rainy.jpg";
-import Snow from "../images/snow.jpg";
+import snow from "../images/snow.jpg";
 import Fog from "../images/fog.png";
 import Stormy from "../images/Stormy.jpg";
 import sky from "../images/sky.jpg";
+import Sunny from "../images/Sunny.jpg";
 
 import Loading from "./Loading";
 
@@ -50,13 +51,13 @@ const WeatherCard = () => {
       const condition = data.weather[0].description.toLowerCase();
       let newBackgroundImage = Clear;
       if (condition.includes("clear")) {
-        newBackgroundImage = Clear;
+        newBackgroundImage = Sunny;
       } else if (condition.includes("cloud")) {
         newBackgroundImage = Cloudy;
       } else if (condition.includes("rain") || condition.includes("shower")) {
         newBackgroundImage = Rainy;
       } else if (condition.includes("snow")) {
-        newBackgroundImage = Snow;
+        newBackgroundImage = snow;
       } else if (condition.includes("fog")) {
         newBackgroundImage = Fog;
       } else if (condition.includes("thunder") || condition.includes("storm")) {

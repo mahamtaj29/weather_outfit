@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, TextField, Container, Typography, Box } from "@mui/material";
 import axios from "axios";
-
+import simple from "../images/simple.jpg";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +22,18 @@ const Register = () => {
   };
 
   return (
+    <div style={{
+      backgroundImage: `url(${simple})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "white",
+      transition: "background-image 0.5s ease-in-out",
+  }}>
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
@@ -82,6 +94,7 @@ const Register = () => {
         {message && <Typography color="error">{message}</Typography>}
       </Box>
     </Container>
+    </div>
   );
 };
 
