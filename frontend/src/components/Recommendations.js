@@ -8,12 +8,9 @@ import genCoatMsg from "../utils/genCoatMsg";
 
 const Recommendations = ({ weatherData }) => {
   if (!weatherData) return null;
-
-  //const { weather, wind } = weatherData;
+  // Destructure relevant data from the weatherData object
   const { main, weather, wind } = weatherData;
   const lowestTemp = main.temp_min;
-  //const highestTemp = main.temp_max;
-  //const precipType = weather[0].main;
   const windSpeed = wind.speed;
   const weatherDescription = weather[0].description;
   const humidity = main.humidity;

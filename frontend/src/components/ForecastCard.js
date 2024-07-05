@@ -2,8 +2,10 @@ import React from "react";
 import { Typography, Box } from "@mui/material";
 
 const ForecastCard = ({ forecast }) => {
+  // This component receives a `forecast` prop, which contains the weather forecast data for a specific time
   return (
     <Box className="forecast-item" sx={{ textAlign: "center", my: 2 }}>
+      {/* Display the day of the week from the forecast datetime */}
       <Typography variant="h6">
         {new Date(forecast.dt_txt).toLocaleDateString("en-US", {
           weekday: "short",

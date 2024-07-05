@@ -3,18 +3,23 @@ import { Button, TextField, Container, Typography, Box } from "@mui/material";
 import axios from "axios";
 import simple from "../images/simple.jpg";
 const Register = () => {
+  // State hooks to manage username, password, and message
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  // Backend URL for the registration API endpoint
   const backendUrl = "https://weather-outfit-backend.vercel.app";
+  // Function to handle user registration
   const handleRegister = async () => {
     try {
+      // Send a POST request to the registration endpoint
       await axios.post(`${backendUrl}/api/auth/register`, {
         username,
         password,
       });
       setMessage("Registration successful. Please log in.");
     } catch (error) {
+      // On error, set an error message
       const errorMessage = error.response?.data?.message || "An error occurred during registration.";
       setMessage("Registration failed: " + errorMessage);
       console.log(errorMessage);
@@ -22,6 +27,7 @@ const Register = () => {
   };
 
   return (
+    //background image and styling for the registration page
     <div style={{
       backgroundImage: `url(${simple})`,
       backgroundSize: "cover",

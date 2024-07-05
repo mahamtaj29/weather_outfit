@@ -1,52 +1,61 @@
-// src/components/Login.jsx
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import axios from 'axios';
-//import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import simple from "../images/simple.jpg";
 const Login = ({ setIsAuthenticated }) => {
+  // State hooks to manage username, password, and message
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  // Used navigate hook for navigation
   const navigate = useNavigate();
+  // Backend URL for the authentication API
   const backendUrl =
     "https://weather-outfit-backend.vercel.app";
+    // Function to handle user login
   const handleLogin = async () => {
     try {
-      
+      // Send a POST request to the login endpoint
       const response = await axios.post(`${backendUrl}/api/auth/login`, { username, password });
       setMessage('Login successful');
+      // On successful login, set a success message and store the token in localStorage
       localStorage.setItem('token', response.data.token);
+      // Set authenticated state to true and navigate to the welcome page
       setIsAuthenticated(true);
       navigate('/welcome');
+      // On error, set an error message
     } catch (error) {
-      setMessage('Login failed, New User must try registration first! ');
+      setMessage('Login failed!');
     }
   };
+  // Effect hook to verify the token 
   useEffect(() => {
   const verifyToken = async () => {
     try {
+      // Get the token from localStorage
       const token = localStorage.getItem('token');
       if (token) {
+        // Send a GET request to the verify endpoint with the token in the headers
         const response = await axios.get(`${backendUrl}/api/auth/verify`, {
-          //{ Authorization: token }
           headers: { Authorization: `Bearer ${token}` }
         });
+        // display token verification response and set authenticated state to true
         console.log('Token is valid:', response.data);
-        //new step
         setIsAuthenticated(true);
       }
+      // On error, display the error and set authenticated state to false
     } catch (error) {
       console.error('Token verification failed:', error.response ? error.response.data : error.message);
       setIsAuthenticated(false);
-      //navigate('/login'); // Redirect to login if token verification fails
     }
   };
+  // Call the verifyToken function
     verifyToken();
   }, [setIsAuthenticated]); 
 
   return (
+    // Set background image and styling for the login page
     <div style={{
       backgroundImage: `url(${simple})`,
       backgroundSize: "cover",
@@ -60,8 +69,8 @@ const Login = ({ setIsAuthenticated }) => {
       transition: "background-image 0.5s ease-in-out",
   }}>
     <Container component="main" maxWidth="xs" style={{
-          position: "relative", // Ensure the Container stays within the bounds of the background div
-          zIndex: 1, // Ensure Container is above background
+          position: "relative", 
+          zIndex: 1, 
         }}
     >
       <Box
@@ -71,7 +80,7 @@ const Login = ({ setIsAuthenticated }) => {
           flexDirection: 'column',
           alignItems: 'center',
         }}
-      >
+      > {/* Login form title */}
         <Typography component="h1" variant="h5">
           Login
         </Typography>
@@ -121,10 +130,6 @@ const Login = ({ setIsAuthenticated }) => {
           Login
         </Button>
         {message && <Typography color="error">{message}</Typography>}
-        {/* Link to navigate to /welcome */}
-        {/* <Link to="/welcome" variant="body2">
-          Go to Welcome Page
-        </Link> */}
       </Box>
     </Container>
     </div>

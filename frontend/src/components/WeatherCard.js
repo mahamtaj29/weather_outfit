@@ -12,10 +12,11 @@ import Fog from "../images/fog.png";
 import Stormy from "../images/Stormy.jpg";
 import sky from "../images/sky.jpg";
 import Sunny from "../images/Sunny.jpg";
-
 import Loading from "./Loading";
 
 const WeatherCard = () => {
+  // State variables to manage city, weather data, forecast data, temperature unit,
+  //loading status, and background image
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
@@ -23,12 +24,10 @@ const WeatherCard = () => {
   const [loading, setLoading] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(Clear);
 
-  //const [imageLoaded, setImageLoaded] = useState(false);
-
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
   const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
-
+  // Function to handle search and fetch weather data
   const handleSearch = async () => {
     setLoading(true);
     try {
@@ -46,7 +45,6 @@ const WeatherCard = () => {
       }
       const data = await response.json();
       setWeatherData(data);
-
       // Update background image based on weather conditions
       const condition = data.weather[0].description.toLowerCase();
       let newBackgroundImage = Clear;
@@ -65,9 +63,8 @@ const WeatherCard = () => {
       } else {
         newBackgroundImage = sky;
       }
-      //setImageLoaded(false); // Reset the image loaded state
       setBackgroundImage(newBackgroundImage);
-
+      // Fetch forecast data
       const forecastResponse = await fetch(
         `${forecastUrl}?q=${city}&appid=${apiKey}&units=metric`
       );
@@ -81,6 +78,7 @@ const WeatherCard = () => {
         }
       }
       const forecastData = await forecastResponse.json();
+      // Filter forecast data to get daily forecasts
       const forecasts = forecastData.list.filter(
         (item, index) => index % 8 === 0
       );
@@ -91,9 +89,11 @@ const WeatherCard = () => {
       setLoading(false);
     }
   };
+  // Function to handle temperature unit change
   const handleTemperatureUnitChange = (unit) => {
     setTemperatureUnit(unit);
   };
+  // Function to convert temperature based on selected unit
   const convertTemperature = (temp) => {
     if (temperatureUnit === "imperial") {
       return `${Math.round((temp * 9) / 5 + 32)}°F`;
@@ -101,16 +101,9 @@ const WeatherCard = () => {
       return `${Math.round(temp)}°C`;
     }
   };
-  /* useEffect(() => {
-    const img = new Image();
-    img.src = backgroundImage;
-    img.onload = () => setImageLoaded(true);
-  }, [backgroundImage]); */
-
   return (
     <Box
       sx={{
-        //backgroundImage: imageLoaded ? `url(${backgroundImage})` : "none",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -144,17 +137,17 @@ const WeatherCard = () => {
               mb: 2,
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "white", // border color
+                  borderColor: "white",
                 },
                 "&:hover fieldset": {
-                  borderColor: "white", // border color on hover
+                  borderColor: "white",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "white", // border color when focused
+                  borderColor: "white",
                 },
               },
               "& .MuiInputLabel-root": {
-                color: "white", // label color
+                color: "white",
               },
             }}
           />

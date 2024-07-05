@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
-
+// a custom theme using Material-UI's createTheme function
 const theme = createTheme({
+  // Define the color palette for the theme
   palette: {
     primary: {
       main: "#007bff",
@@ -13,6 +14,7 @@ const theme = createTheme({
       secondary: "#000000", // Black text for light backgrounds
     },
   },
+  // Defined typography styles for the theme
   typography: {
     fontFamily: "Georgia, serif",
     h2: {

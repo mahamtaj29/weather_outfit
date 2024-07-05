@@ -3,18 +3,24 @@ import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import welcome from "../images/welcome.jpg";
+// Welcome component
 const Welcome = () => {
+  // State hooks to manage city and message
   const [city, setCity] = useState('');
   const [message, setMessage] = useState('');
+  // Backend URL for the city saving API
   const backendUrl =
     "https://weather-outfit-backend.vercel.app";
+  // Function to handle changes in the city input field
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
-  
+  // Function to handle city submission
   const handleCitySubmit = async () => {
     try {
+      // Get the token from localStorage
       const token = localStorage.getItem('token');
+      // Send a POST request to save the city with the token in the headers
       const response = await axios.post(`${backendUrl}/api/cities`, { name: city }, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -22,20 +28,18 @@ const Welcome = () => {
       });
       if (response.status === 200) {
         console.log("Token is valid");
-        // Additional logic here
       } else {
         console.log("Token is invalid");
-        // Handle error
       }
+      // Set a success message and clear the city input
       setMessage('City saved successfully!');
       setCity('');
     } catch (error) {
+      // On error, log the error and set an error message
       console.error('Error saving city:', error);
       setMessage('Error saving city');
     }
   };
- 
-
   return (
     <Box
       sx={{
