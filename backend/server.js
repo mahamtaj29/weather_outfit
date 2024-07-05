@@ -15,9 +15,7 @@ passportConfig(passport);
 const corsOptions = {
   origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-  optionsSuccessStatus: 200, // Sets the status code to 200 for preflight OPTIONS requests
-  credentials: true, // Allows cookies and authorization headers with credentials
+  allowedHeaders: ["Content-Type", "Authorization"],
   optionsSuccessStatus: 200,
   credentials: true,
 };
