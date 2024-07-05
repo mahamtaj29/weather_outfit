@@ -4,7 +4,7 @@ This is a weather forecast application built with React and Material-UI that pro
 
 ## Live Demo
 
-Check out the live demo on Vercel: [Outfit Recommendation App](https://weather-outfit-sandy.vercel.app/)
+Check out the live demo on Vercel: [Outfit Recommendation App](https://weather-outfit-frontend.vercel.app/)
 
 ## Features
 
